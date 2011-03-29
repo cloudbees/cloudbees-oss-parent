@@ -175,9 +175,6 @@
                 </goals>
               </execution>
             </executions>
-            <configuration>
-              <keyname>4A2F92BB</keyname>
-            </configuration>
           </plugin>
         </plugins>
       </build>
