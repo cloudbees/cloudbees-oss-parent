@@ -15,14 +15,13 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.cloudbees</groupId>
   <artifactId>cloudbees-oss-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1-SNAPSHOT</version>
+  <version>1</version>
 
   <name>cloudbees-oss-parent</name>
   <description>The CloudBees OSS Parent Project</description>
@@ -42,9 +41,9 @@
       <name>Stephen Connolly</name>
     </developer>
   </developers>
-  <contributors/>
+  <contributors />
 
-  <mailingLists/>
+  <mailingLists />
 
   <prerequisites>
     <maven>2.2.1</maven>
@@ -55,8 +54,8 @@
     <developerConnection>scm:git:git@github.com:cloudbees/cloudbees-oss-parent.git</developerConnection>
     <url>http://github.com/cloudbees/cloudbees-oss-parent/tree/master/</url>
   </scm>
-  <issueManagement/>
-  <ciManagement/>
+  <issueManagement />
+  <ciManagement />
   <distributionManagement>
     <snapshotRepository>
       <id>cloudbees-nexus-snapshots</id>
