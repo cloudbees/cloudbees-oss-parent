@@ -21,7 +21,7 @@
   <groupId>com.cloudbees</groupId>
   <artifactId>cloudbees-oss-parent</artifactId>
   <packaging>pom</packaging>
-  <version>2</version>
+  <version>3-SNAPSHOT</version>
 
   <name>cloudbees-oss-parent</name>
   <description>The CloudBees OSS Parent Project</description>
