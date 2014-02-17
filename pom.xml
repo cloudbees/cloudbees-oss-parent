@@ -90,6 +90,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
     <git.provider>git</git.provider>
+    <arguments/>
   </properties>
 
   <build>
