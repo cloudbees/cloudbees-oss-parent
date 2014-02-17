@@ -89,6 +89,7 @@
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
+    <git.provider>git</git.provider>
   </properties>
 
   <build>
@@ -149,9 +150,9 @@
           <configuration>
             <mavenExecutorId>forked-path</mavenExecutorId>
             <useReleaseProfile>false</useReleaseProfile>
-            <arguments>-Pcloudbees-oss-release</arguments>
+            <arguments>-P+cloudbees-oss-release ${arguments}</arguments>
             <providerImplementations>
-              <git>jgit</git>
+              <git>${git.provider}</git>
             </providerImplementations>
           </configuration>
           <dependencies>
@@ -160,20 +161,30 @@
               <artifactId>maven-scm-provider-jgit</artifactId>
               <version>1.9</version>
             </dependency>
-          </dependencies>
+            <dependency>
+              <groupId>org.apache.maven.scm</groupId>
+              <artifactId>maven-scm-provider-gitexe</artifactId>
+              <version>1.9</version>
+            </dependency>
+           </dependencies>
         </plugin>
         <plugin>
           <artifactId>maven-scm-plugin</artifactId>
           <version>1.9</version>
           <configuration>
             <providerImplementations>
-              <git>jgit</git>
+              <git>${git.provider}</git>
             </providerImplementations>
           </configuration>
           <dependencies>
             <dependency>
               <groupId>org.apache.maven.scm</groupId>
               <artifactId>maven-scm-provider-jgit</artifactId>
+              <version>1.9</version>
+            </dependency>
+            <dependency>
+              <groupId>org.apache.maven.scm</groupId>
+              <artifactId>maven-scm-provider-gitexe</artifactId>
               <version>1.9</version>
             </dependency>
           </dependencies>
