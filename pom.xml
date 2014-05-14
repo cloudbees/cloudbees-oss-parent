@@ -21,7 +21,7 @@
   <groupId>com.cloudbees</groupId>
   <artifactId>cloudbees-oss-parent</artifactId>
   <packaging>pom</packaging>
-  <version>5-SNAPSHOT</version>
+  <version>5</version>
 
   <name>cloudbees-oss-parent</name>
   <description>The CloudBees OSS Parent Project</description>
@@ -53,7 +53,7 @@
     <connection>scm:git:git://github.com/cloudbees/cloudbees-oss-parent.git</connection>
     <developerConnection>scm:git:git@github.com:cloudbees/cloudbees-oss-parent.git</developerConnection>
     <url>http://github.com/cloudbees/cloudbees-oss-parent/tree/master/</url>
-    <tag>HEAD</tag>
+    <tag>cloudbees-oss-parent-5</tag>
   </scm>
   <issueManagement />
   <ciManagement />
