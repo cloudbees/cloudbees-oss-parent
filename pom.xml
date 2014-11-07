@@ -91,6 +91,7 @@
     <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
     <git.provider>git</git.provider>
     <maven-scm.version>1.9.2</maven-scm.version>
+    <arguments> </arguments>
   </properties>
 
   <build>
