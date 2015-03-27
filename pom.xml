@@ -74,7 +74,7 @@
     <repository>
       <id>cloudbees-nexus-snapshots</id>
       <name>Sonatype Nexus Snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -119,6 +119,17 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.5</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>sonatype-nexus-staging</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -151,6 +162,7 @@
           <version>2.5.1</version>
           <configuration>
             <mavenExecutorId>forked-path</mavenExecutorId>
+            <!-- TODO is there something wrong with the standard release profile, other than not including maven-gpg-plugin? -->
             <useReleaseProfile>false</useReleaseProfile>
             <arguments>-P+cloudbees-oss-release ${arguments}</arguments>
           </configuration>
