@@ -15,13 +15,14 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.cloudbees</groupId>
   <artifactId>cloudbees-oss-parent</artifactId>
-  <packaging>pom</packaging>
   <version>7-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
   <name>cloudbees-oss-parent</name>
   <description>The CloudBees OSS Parent Project</description>
@@ -46,7 +47,7 @@
   <mailingLists />
 
   <prerequisites>
-    <maven>2.2.1</maven>
+    <maven>3.0.4</maven>
   </prerequisites>
 
   <scm>
@@ -70,6 +71,17 @@
     </repository>
   </distributionManagement>
 
+  <properties>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/
+    </sonatypeOssDistMgmtSnapshotsUrl>
+    <git.provider>git</git.provider>
+    <maven-scm.version>1.9.4</maven-scm.version>
+    <arguments> </arguments>
+  </properties>
+
   <repositories>
     <repository>
       <id>cloudbees-nexus-snapshots</id>
@@ -84,17 +96,117 @@
     </repository>
   </repositories>
 
-  <properties>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
-    <git.provider>git</git.provider>
-    <maven-scm.version>1.9.2</maven-scm.version>
-    <arguments> </arguments>
-  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <!--  as we are pushing findbugs it makes sense that we define the findbugs annotations here -->
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>annotations</artifactId>
+        <version>3.0.0</version>
+        <scope>provided</scope>
+        <optional>true</optional>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.5.5</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>2.6.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.10</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.4</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>2.18.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.6</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.10.3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+           <version>2.7</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.2</version>
+          <configuration>
+            <mavenExecutorId>forked-path</mavenExecutorId>
+            <useReleaseProfile>false</useReleaseProfile>
+            <arguments>-P+cloudbees-oss-release ${arguments}</arguments>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.4</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.18.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>3.0.1</version>
+          <executions>
+            <execution>
+              <id>findbugs</id>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <phase>verify</phase>
+              <configuration>
+                <!--  Do not define excludeFilterFile here as it will force a plugin to provide a file -->
+                <!--  Instead we configure this in a profile -->
+                <xmlOutput>true</xmlOutput>
+                <findbugsXmlOutput>false</findbugsXmlOutput>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
@@ -107,12 +219,13 @@
             <configuration>
               <rules>
                 <requireMavenVersion>
-                  <version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
-                  <message>Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums respectively.</message>
+                  <version>[3.0,)</version>
+                  <message>Maven 2.x is end of life</message>
                 </requireMavenVersion>
                 <requireMavenVersion>
                   <version>(,3.0),[3.0.4,)</version>
-                  <message>Maven 3.0 through 3.0.3 inclusive do not pass correct settings.xml to Maven Release Plugin.</message>
+                  <message>Maven 3.0 through 3.0.3 inclusive do not pass correct settings.xml to Maven Release Plugin.
+                  </message>
                 </requireMavenVersion>
               </rules>
             </configuration>
@@ -131,52 +244,6 @@
         </configuration>
       </plugin>
     </plugins>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>2.6</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>1.3.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.5</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.10.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>2.5.1</version>
-          <configuration>
-            <mavenExecutorId>forked-path</mavenExecutorId>
-            <!-- TODO is there something wrong with the standard release profile, other than not including maven-gpg-plugin? -->
-            <useReleaseProfile>false</useReleaseProfile>
-            <arguments>-P+cloudbees-oss-release ${arguments}</arguments>
-          </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.4</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
 
   <profiles>
@@ -231,40 +298,65 @@
       </activation>
       <build>
         <plugins>
-        <plugin>
-          <artifactId>maven-release-plugin</artifactId>
-          <configuration>
-            <providerImplementations>
-              <git>${git.provider}</git>
-            </providerImplementations>
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>org.apache.maven.scm</groupId>
-              <artifactId>maven-scm-provider-jgit</artifactId>
-              <version>${maven-scm.version}</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-        <plugin>
-          <artifactId>maven-scm-plugin</artifactId>
-          <version>${maven-scm.version}</version>
-          <configuration>
-            <providerImplementations>
-              <git>${git.provider}</git>
-            </providerImplementations>
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>org.apache.maven.scm</groupId>
-              <artifactId>maven-scm-provider-jgit</artifactId>
-              <version>${maven-scm.version}</version>
-            </dependency>
-          </dependencies>
-        </plugin>
+          <plugin>
+            <artifactId>maven-release-plugin</artifactId>
+            <configuration>
+              <providerImplementations>
+                <git>${git.provider}</git>
+              </providerImplementations>
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>org.apache.maven.scm</groupId>
+                <artifactId>maven-scm-provider-jgit</artifactId>
+                <version>${maven-scm.version}</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+          <plugin>
+            <artifactId>maven-scm-plugin</artifactId>
+            <version>${maven-scm.version}</version>
+            <configuration>
+              <providerImplementations>
+                <git>${git.provider}</git>
+              </providerImplementations>
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>org.apache.maven.scm</groupId>
+                <artifactId>maven-scm-provider-jgit</artifactId>
+                <version>${maven-scm.version}</version>
+              </dependency>
+            </dependencies>
+          </plugin>
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>findbugs-exclusion-file</id>
+      <activation>
+        <file>
+          <exists>${basedir}/src/findbugs/excludesFilter.xml</exists>
+        </file>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>findbugs-maven-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>findbugs</id>
+                  <configuration>
+                    <excludeFilterFile>${project.basedir}/src/findbugs/excludesFilter.xml</excludeFilterFile>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
   </profiles>
-
 </project>
