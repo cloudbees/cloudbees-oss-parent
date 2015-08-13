@@ -241,6 +241,8 @@
           <serverId>cloudbees-nexus-snapshots</serverId>
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          <!--stagingProfileId>2ba52c484c574d</stagingProfileId--><!-- if groupId starts with com.cloudbees-->
+          <!--stagingProfileId>2acf39d998ccd7</stagingProfileId--><!-- if groupId starts with org.cloudbees-->
         </configuration>
       </plugin>
     </plugins>
