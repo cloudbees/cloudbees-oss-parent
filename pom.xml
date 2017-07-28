@@ -45,10 +45,6 @@
 
   <mailingLists />
 
-  <prerequisites>
-    <maven>3.0.4</maven>
-  </prerequisites>
-
   <scm>
     <connection>scm:git:git://github.com/cloudbees/cloudbees-oss-parent.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/cloudbees/cloudbees-oss-parent.git</developerConnection>
@@ -258,7 +254,7 @@
               <execution>
                 <id>attach-sources</id>
                 <goals>
-                  <goal>jar-no-fork</goal>
+                  <goal>jar</goal>
                 </goals>
               </execution>
             </executions>
