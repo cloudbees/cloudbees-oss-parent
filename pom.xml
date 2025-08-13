@@ -62,7 +62,7 @@
     <repository>
       <id>cloudbees-nexus-staging</id>
       <name>Nexus Release Repository</name>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <url>${distributionRootUrl}/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
 
@@ -70,7 +70,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/
+    <distributionRootUrl>https://ossrh-staging-api.central.sonatype.com</distributionRootUrl>
+    <sonatypeOssDistMgmtSnapshotsUrl>${distributionRootUrl}/content/repositories/snapshots/
     </sonatypeOssDistMgmtSnapshotsUrl>
     <git.provider>git</git.provider>
     <maven-scm.version>1.9.4</maven-scm.version>
@@ -234,7 +235,7 @@
         <extensions>true</extensions>
         <configuration>
           <serverId>cloudbees-nexus-snapshots</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <nexusUrl>${distributionRootUrl}/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
           <!--stagingProfileId>2ba52c484c574d</stagingProfileId--><!-- if groupId starts with com.cloudbees-->
           <!--stagingProfileId>2acf39d998ccd7</stagingProfileId--><!-- if groupId starts with org.cloudbees-->
