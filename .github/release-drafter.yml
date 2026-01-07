@@ -1,0 +1,30 @@
+name-template: CloudBees OSS Parent $NEXT_PATCH_VERSION
+tag-template: cloudbees-oss-parent-$NEXT_PATCH_VERSION
+version-template: $MAJOR.$MINOR.$PATCH
+
+# Emoji reference: https://gitmoji.carloscuesta.me/
+categories:
+  - title: ":boom: Breaking changes"
+    labels:
+      - breaking
+  - title: ⚠️ Deprecated
+    label: deprecated
+  - title: 🚀 New features and improvements
+    labels:
+      - enhancement
+      - feature
+  - title: 🐛 Bug Fixes
+    labels:
+      - bug
+      - regression
+  # Default label used by Dependabot
+  - title: 📦 Dependency updates
+    label: dependencies
+  - title: 📝 Documentation updates
+    label: documentation
+  - title: 👻 Maintenance
+    labels:
+      - chore
+
+exclude-labels:
+  - no-changelog
