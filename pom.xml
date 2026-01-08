@@ -130,7 +130,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>1.4</version>
+          <version>3.6.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-failsafe-plugin</artifactId>
