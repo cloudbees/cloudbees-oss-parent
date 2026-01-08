@@ -74,7 +74,7 @@
     <sonatypeOssDistMgmtSnapshotsUrl>${distributionRootUrl}/content/repositories/snapshots/
     </sonatypeOssDistMgmtSnapshotsUrl>
     <git.provider>git</git.provider>
-    <maven-scm.version>1.9.4</maven-scm.version>
+    <maven-scm.version>2.2.1</maven-scm.version>
     <arguments> </arguments>
   </properties>
 
